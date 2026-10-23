@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الدعاء من الكتاب والسنة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   1 · DESIGN TOKENS
+   ═══════════════════════════════════════════ */
+:root{
+  --bg-0: #060A08; /* Deep Emerald Black */
+  --ink: #F4EDE3;
+  --ink-2: rgba(244,237,227,.72);
+  --ink-3: rgba(244,237,227,.42);
+  
+  --gold: #E3C48D;
+  --gold-2: #B98F4E;
+  --gold-soft: rgba(227,196,141,.14);
+  
+  --line: rgba(227,196,141,.2);
+  --line-soft: rgba(244,237,227,.06);
+  
+  --ease: cubic-bezier(.22,.8,.22,1);
+}
+
+/* ═══════════════════════════════════════════
+   2 · RESET & BASE
+   ═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+body{
+  background:var(--bg-0);
+  color:var(--ink);
+  font-family:'Cairo', sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+
+::selection{background:rgba(227,196,141,.22);color:var(--ink)}
+
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg-0)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(227,196,141,.35),rgba(227,196,141,.18));border-radius:999px;}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,rgba(227,196,141,.55),rgba(227,196,141,.3));}
+
+/* ═══════════════════════════════════════════
+   3 · ATMOSPHERE
+   ═══════════════════════════════════════════ */
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+
+.bg.grid{
+  background-image:
+    linear-gradient(rgba(227,196,141,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(227,196,141,.02) 1px,transparent 1px);
+  background-size:80px 80px;
+  -webkit-mask:radial-gradient(ellipse 80% 70% at 50% 30%,#000 20%,transparent 80%);
+  mask:radial-gradient(ellipse 80% 70% at 50% 30%,#000 20%,transparent 80%);
+}
+
+.bg.glow{
+  background:
+    radial-gradient(ellipse 50% 40% at 20% 20%, rgba(227,196,141,.06), transparent 65%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(13,35,24,.5), transparent 65%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(185,143,78,.04), transparent 70%);
+}
+
+.bg.grain{
+  opacity:.3;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.9 0 0 0 0 0.8 0 0 0 0.16 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;
+}
+
+/* ═══════════════════════════════════════════
+   4 · MAIN CARD
+   ═══════════════════════════════════════════ */
+.card-container{
+  position:relative;
+  z-index:10;
+  width:100%;
+  max-width:650px;
+  padding:20px;
+}
+
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:clamp(40px, 6vw, 64px) clamp(24px, 5vw, 48px);
+  text-align:center;
+  box-shadow:0 30px 60px rgba(0,0,0,.6), 0 0 40px rgba(227,196,141,.03);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Decorative corner lines */
+.card::before, .card::after{
+  content:"";
+  position:absolute;
+  width:60px;height:60px;
+  border:2px solid var(--gold-2);
+  opacity:.3;
+  transition:opacity .4s;
+  pointer-events:none;
+}
+.card::before{
+  top:20px; right:20px;
+  border-bottom:none; border-left:none;
+  border-radius:0 12px 0 0;
+}
+.card::after{
+  bottom:20px; left:20px;
+  border-top:none; border-right:none;
+  border-radius:0 0 0 12px;
+}
+.card:hover::before, .card:hover::after{ opacity:.6; }
+
+/* Book Icon */
+.book-icon{
+  width:64px;height:64px;
+  margin:0 auto 24px;
+  color:var(--gold);
+  opacity:.8;
+  filter:drop-shadow(0 0 10px rgba(227,196,141,.3));
+}
+
+/* Typography */
+.eyebrow{
+  display:inline-block;
+  font-family:'Cairo', sans-serif;
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  color:var(--gold-2);
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+h1{
+  font-family:'Amiri', serif;
+  font-size:clamp(2.2rem, 5vw, 3.2rem);
+  font-weight:700;
+  line-height:1.3;
+  color:var(--ink);
+  margin-bottom:16px;
+  text-shadow:0 2px 10px rgba(0,0,0,.5);
+}
+
+.author{
+  font-family:'Cairo', sans-serif;
+  font-size:1.05rem;
+  font-weight:400;
+  color:var(--ink-2);
+  margin-bottom:32px;
+}
+
+/* Ornamental Divider */
+.divider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:40px;
+  opacity:.7;
+}
+.divider span{
+  height:1px;
+  width:60px;
+  background:linear-gradient(90deg, transparent, var(--gold));
+}
+.divider span:last-child{
+  background:linear-gradient(90deg, var(--gold), transparent);
+}
+.divider i{
+  width:8px;height:8px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  display:block;
+}
+
+/* ═══════════════════════════════════════════
+   5 · DOWNLOAD BUTTON
+   ═══════════════════════════════════════════ */
+.btn-download{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:16px 40px;
+  background:linear-gradient(135deg, var(--gold), var(--gold-2));
+  color:var(--bg-0);
+  font-family:'Cairo', sans-serif;
+  font-size:1.1rem;
+  font-weight:700;
+  text-decoration:none;
+  border-radius:50px;
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 10px 25px rgba(227,196,141,.15);
+  transition:all .4s var(--ease);
+  position:relative;
+  overflow:hidden;
+}
+
+.btn-download svg{
+  width:22px;height:22px;
+  transition:transform .4s var(--ease);
+}
+
+/* Button Hover Effects */
+.btn-download:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 35px rgba(227,196,141,.4), 0 0 20px rgba(227,196,141,.2);
+  background:linear-gradient(135deg, #F4EDE3, var(--gold));
+  color:var(--bg-0);
+}
+
+.btn-download:hover svg{
+  transform:translateY(3px);
+}
+
+/* Shine effect */
+.btn-download::after{
+  content:"";
+  position:absolute;
+  top:0; left:-100%;
+  width:100%; height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+  transition:left .6s var(--ease);
+  pointer-events:none;
+}
+.btn-download:hover::after{
+  left:100%;
+}
+
+/* Responsive */
+@media (max-width: 480px){
+  .card{padding:36px 20px;}
+  .btn-download{width:100%; padding:16px 20px; font-size:1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ATMOSPHERE -->
+<div class="bg grid" aria-hidden="true"></div>
+<div class="bg glow" aria-hidden="true"></div>
+<div class="bg grain" aria-hidden="true"></div>
+
+<!-- CONTENT -->
+<main class="card-container">
+  <article class="card">
+    
+    <!-- Islamic Ornament / Book Icon -->
+    <svg class="book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+      <path d="M10 8h6"></path>
+      <path d="M10 12h6"></path>
+    </svg>
+
+    <span class="eyebrow">مكتبة BİŞİŞ · إصدار رقمي</span>
+    
+    <h1>الدعاء من الكتاب والسنة</h1>
+    
+    <p class="author">تأليف: د. سعيد بن علي بن وهف القحطاني</p>
+
+    <div class="divider" aria-hidden="true">
+      <span></span>
+      <i></i>
+      <span></span>
+    </div>
+
+    <!-- Download Button -->
+    <a href="book.pdf" download="الدعاء من الكتاب والسنة.pdf" class="btn-download">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      تحميل الكتاب
+    </a>
+
+  </article>
+</main>
+
+</body>
+</html>
